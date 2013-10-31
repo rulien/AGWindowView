@@ -32,7 +32,7 @@
 
 @interface AGWindowView : UIView
 
-@property (nonatomic, assign) UIUIInterInterfaceOrientationMask supportedInterfaceOrientations;
+@property (nonatomic, assign) UIInterfaceOrientationMask supportedInterfaceOrientations;
 
 /**
  * @property UIViewController *controller. Convinience for having a strong reference to your controller.

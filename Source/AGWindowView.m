@@ -81,7 +81,7 @@ static NSMutableArray *_activeWindowViews;
 {
     self = [super initWithFrame:frame];
     if(self)
-    {UI
+    {
         [self setup];
         self.opaque = NO;
         self.backgroundColor = [UIColor clearColor];
@@ -371,7 +371,7 @@ static BOOL IS_BELOW_IOS_7()
     return _activeWindowViews;
 }
 
-+ (AGWindowView *)firstActiveWindowViewPassingTest:(BOOL (^)(UIInterWindowView *windowView, BOOL *stop))test
++ (AGWindowView *)firstActiveWindowViewPassingTest:(BOOL (^)(AGWindowView *windowView, BOOL *stop))test
 {
     __block AGWindowView *hit = nil;
     [_activeWindowViews enumerateObjectsUsingBlock:^(AGWindowView *windowView, NSUInteger idx, BOOL *stop) {

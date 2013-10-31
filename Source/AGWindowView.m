@@ -81,7 +81,7 @@ static NSMutableArray *_activeWindowViews;
 {
     self = [super initWithFrame:frame];
     if(self)
-    {
+    {UI
         [self setup];
         self.opaque = NO;
         self.backgroundColor = [UIColor clearColor];
@@ -111,14 +111,14 @@ static NSMutableArray *_activeWindowViews;
 
 - (void)setup
 {    
-    _supportedInterfaceOrientations = AGInterfaceOrientationMaskAll;
+    _supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameOrOrientationChanged:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameOrOrientationChanged:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
 }
 
-- (void)setSupportedInterfaceOrientations:(AGInterfaceOrientationMask)supportedInterfaceOrientations
+- (void)setSupportedInterfaceOrientations:(UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     _supportedInterfaceOrientations = supportedInterfaceOrientations;
     
@@ -202,22 +202,22 @@ static BOOL IS_BELOW_IOS_7()
 - (UIInterfaceOrientation)desiredOrientation
 {
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    AGInterfaceOrientationMask statusBarOrientationAsMask = AGInterfaceOrientationMaskFromOrientation(statusBarOrientation);
+    UIInterfaceOrientationMask statusBarOrientationAsMask = UIInterfaceOrientationMaskFromOrientation(statusBarOrientation);
     if(self.supportedInterfaceOrientations & statusBarOrientationAsMask)
     {
         return statusBarOrientation;
     }
     else
     {
-        if(self.supportedInterfaceOrientations & AGInterfaceOrientationMaskPortrait)
+        if(self.supportedInterfaceOrientations & UIInterfaceOrientationMaskPortrait)
         {
             return UIInterfaceOrientationPortrait;
         }
-        else if(self.supportedInterfaceOrientations & AGInterfaceOrientationMaskLandscapeLeft)
+        else if(self.supportedInterfaceOrientations & UIInterfaceOrientationMaskLandscapeLeft)
         {
             return UIInterfaceOrientationLandscapeLeft;
         }
-        else if(self.supportedInterfaceOrientations & AGInterfaceOrientationMaskLandscapeRight)
+        else if(self.supportedInterfaceOrientations & UIInterfaceOrientationMaskLandscapeRight)
         {
             return UIInterfaceOrientationLandscapeRight;
         }
@@ -371,7 +371,7 @@ static BOOL IS_BELOW_IOS_7()
     return _activeWindowViews;
 }
 
-+ (AGWindowView *)firstActiveWindowViewPassingTest:(BOOL (^)(AGWindowView *windowView, BOOL *stop))test
++ (AGWindowView *)firstActiveWindowViewPassingTest:(BOOL (^)(UIInterWindowView *windowView, BOOL *stop))test
 {
     __block AGWindowView *hit = nil;
     [_activeWindowViews enumerateObjectsUsingBlock:^(AGWindowView *windowView, NSUInteger idx, BOOL *stop) {
@@ -453,7 +453,7 @@ CGFloat UIInterfaceOrientationAngleOfOrientation(UIInterfaceOrientation orientat
     return angle;
 }
 
-AGInterfaceOrientationMask AGInterfaceOrientationMaskFromOrientation(UIInterfaceOrientation orientation)
+UIInterfaceOrientationMask UIInterfaceOrientationMaskFromOrientation(UIInterfaceOrientation orientation)
 {
     return 1 << orientation;
 }
